@@ -1,16 +1,129 @@
-# React + Vite
+# Weather UI — React + Vite + Tailwind
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, responsive weather application built as a **UI-focused engineering exercise**.  
+The goal of this project is not only to fetch and display weather data, but to demonstrate **component design, state management, API integration, and code organization** in a modern React environment.
 
-Currently, two official plugins are available:
+## Project Goals
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Build a polished, production-quality UI from a visual reference
+- Fetch and normalize third-party API data
+- Demonstrate clean React patterns (hooks, composition, separation of concerns)
+- Keep the codebase readable, maintainable, and reviewer-friendly
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Search weather by ZIP code (WeatherAPI supports additional location formats)
+- Current temperature with Fahrenheit / Celsius toggle
+- City + region display derived from API response
+- Condition-based weather icons
+- 5-day forecast
+- Fast local development with Vite
+- Tailwind-styled UI with consistent spacing and typography
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React 18**
+- **Vite** (dev server & bundler)
+- **Tailwind CSS** (styling)
+- **WeatherAPI.com** (data source)
+- **React Icons** (iconography)
+
+## Project Structure
+
+src/
+├── components/
+│ ├── WeatherCard.jsx # Main UI container
+│ ├── SearchInput.jsx # Controlled ZIP input + submit
+│ ├── UnitToggle.jsx # °F / °C toggle
+│ └── ForecastRow.jsx # 5-day forecast display
+├── hooks/
+│ └── useWeather.js # API fetching + request state
+├── utils/
+│ ├── formatters.js # Formatting & normalization helpers
+│ └── weatherIcons.js # Condition → icon mapping
+├── App.jsx
+├── main.jsx
+└── index.css
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js **v18+**
+- npm **v9+**
+
+### Install
+
+## using bash
+npm install
+
+## Custom Hook for Data Fetching (useWeather)
+
+All API logic is isolated in a dedicated hook:
+
+Keeps components focused on rendering
+
+Centralizes loading, error, and abort handling
+
+Makes the data layer easy to swap or extend
+
+This mirrors patterns commonly used in production apps.
+
+## No UI Component Library
+
+Tailwind CSS is used directly instead of a component library:
+
+Ensures full control over spacing, sizing, and visual fidelity
+
+Avoids unnecessary abstraction for a small, focused UI
+
+Makes styling intent explicit and reviewable
+
+## Derived State Instead of Re-Fetching
+
+Unit toggling (°F / °C) does not trigger additional API calls:
+
+WeatherAPI provides both units in the response
+
+UI simply switches which values are rendered
+
+This improves performance and reduces network usage.
+
+## Small, Purpose-Built Components
+
+Components are intentionally narrow in responsibility:
+
+SearchInput → user input & submit
+
+UnitToggle → display-only state toggle
+
+ForecastRow → forecast visualization
+
+WeatherCard → composition + layout
+
+This structure favors readability and testability over clever abstractions.
+
+## Defensive Rendering
+
+The UI is written to handle:
+
+Loading states
+
+Partial or missing API data
+
+Aborted requests
+
+This avoids runtime crashes and reflects real-world API behavior.
+
+
+## License
+
+This project is intended as a demonstration and learning exercise.
+Feel free to fork or adapt it for your own use.
+
+## Credits
+
+Weather data provided by WeatherAPI.com
+
+Icons provided by React Icons
+
